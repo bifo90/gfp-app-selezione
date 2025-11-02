@@ -1,15 +1,13 @@
 <% content_for :title, "Editing consumption" %>
 <main class="py-10 lg:pl-72">
     <div class="px-4 sm:px-6 lg:px-8">
-<h1>Editing consumption</h1>
-
+<div class="mb-8">
+  <%= link_to "← Torna ai tuoi consumi", admin_consumptions_path, class: "text-sm/6 font-medium text-gray-900" %>
+</div>
 <%= render "form", consumption: @consumption %>
 
 <br>
 
-<div>
-  <%= link_to "Show this consumption", admin_consumption_path(@consumption) %> |
-  <%= link_to "Back to consumptions", admin_consumptions_path %>
-</div>
+
 </div>
 </main>

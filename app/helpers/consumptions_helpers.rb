@@ -37,4 +37,11 @@ module ConsumptionsHelpers
       consumption.measure
     end
   end
+  def consumption_select_options
+    [
+      [ "Elettricità", "electricity" ],
+      [ "Acqua", "water" ],
+      [ "Gas", "gas" ]
+    ]
+  end
 end

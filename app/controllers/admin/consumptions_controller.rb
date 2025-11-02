@@ -10,6 +10,10 @@ class Admin::ConsumptionsController < ApplicationController
 
   def show
   end
+
+  def new
+    @consumption = Consumption.new
+  end
   def edit
   end
 

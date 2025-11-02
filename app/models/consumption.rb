@@ -1,5 +1,4 @@
 class Consumption < ApplicationRecord
-  include ActionView::Helpers::NumberHelper
   belongs_to :user
 
   CONSUMPTION_TYPES = %w[electricity water gas].freeze
