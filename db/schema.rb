@@ -12,10 +12,10 @@
 
 ActiveRecord::Schema[8.1].define(version: 2025_11_02_101056) do
   create_table "consumptions", force: :cascade do |t|
+    t.string "consumption_type"
     t.datetime "created_at", null: false
     t.datetime "date"
     t.string "measure"
-    t.string "type"
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.float "value"

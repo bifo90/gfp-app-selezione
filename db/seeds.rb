@@ -11,7 +11,22 @@
 users = User.all
 
 if users.empty?
-  throw new Exception("No users found! Please create at least one user before seeding the database.")
+  puts "No users found! Please create at least one user before seeding the database."
 else
-  throw new Exception("Users Trovati")
+  users.each do |user|
+    20.times do |i|
+      c = Consumption.create!(
+        user: user,
+        value: rand(10..100),
+        date: Date.today - i.days,
+        measure: Consumption::MEASURES.sample,
+        consumption_type: Consumption::CONSUMPTION_TYPES.sample
+      )
+      if c
+        puts "Created consumption record for user #{user.email_address}: #{c.consumption_type} - #{c.value} #{c.measure} on #{c.date}"
+      else
+        puts "Failed to create consumption record for user #{user.email_address}"
+      end
+    end
+  end
 end

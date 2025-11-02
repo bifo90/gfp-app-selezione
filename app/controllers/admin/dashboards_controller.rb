@@ -4,5 +4,6 @@ class Admin::DashboardsController < ApplicationController
 
   def index
     @user = Current.user
+    @consumptions = @user.consumptions.model_to_stats
   end
 end
