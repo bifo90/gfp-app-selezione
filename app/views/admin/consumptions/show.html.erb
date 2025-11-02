@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
+
+<main class="py-10 lg:pl-72">
+    <div class="px-4 sm:px-6 lg:px-8">
 
 <%= render @consumption %>
 
 <div>
-  <%= link_to "Edit this consumption", edit_consumption_path(@consumption) %> |
-  <%= link_to "Back to consumptions", consumptions_path %>
+  <%= link_to "Edit this consumption", edit_admin_consumption_path(@consumption) %> |
+  <%= link_to "Back to consumptions", admin_consumptions_path %>
 
-  <%= button_to "Destroy this consumption", @consumption, method: :delete %>
+  <%= button_to "Destroy this consumption", admin_consumption_path(@consumption), method: :delete %>
 </div>
+</div>
+</main>

@@ -1,4 +1,6 @@
-<%= form_with(model: consumption) do |form| %>
+<main class="py-10 lg:pl-72">
+    <div class="px-4 sm:px-6 lg:px-8">
+<%= form_with(model: consumption, url: admin_consumption_path(consumption)) do |form| %>
   <% if consumption.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(consumption.errors.count, "error") %> prohibited this consumption from being saved:</h2>
@@ -15,3 +17,5 @@
     <%= form.submit %>
   </div>
 <% end %>
+</div>
+</main>
