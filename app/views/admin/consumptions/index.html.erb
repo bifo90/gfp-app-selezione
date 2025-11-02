@@ -1,0 +1,18 @@
+<p style="color: green">
+  <%= notice %>
+</p>
+
+<% content_for :title, "Consumptions" %>
+
+  <h1>Consumptions</h1>
+
+  <div id="consumptions">
+    <% @consumptions.each do |consumption| %>
+      <%= render consumption %>
+        <p>
+          <%= link_to "Show this consumption" , consumption %>
+        </p>
+        <% end %>
+  </div>
+
+  <%= link_to "New consumption" , new_admin_consumption_path %>
