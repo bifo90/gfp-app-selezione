@@ -1,34 +1,42 @@
 <% content_for :title, "Accedi" %>
-<div class="min-h-screen flex items-center justify-center px-4">
-<div class="mx-auto md:w-2/3 w-full">
-  <% if alert = flash[:alert] %>
-    <p class="py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-lg inline-block" id="alert"><%= alert %></p>
-  <% end %>
+<div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <h2 class="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Accedi al tuo account</h2>
+  </div>
 
-  <% if notice = flash[:notice] %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
 
-  <h1 class="font-bold text-4xl">Accedi</h1>
+    <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+      <%= form_with url: session_url, class: "space-y-6" do |form| %>
+        <div>
+          <%= form.label :email_address, "Indirizzo email", class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2">
+            <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Inserisci il tuo indirizzo email", value: params[:email_address], class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-secondary sm:text-sm/6" %>
+          </div>
+        </div>
 
-  <%= form_with url: session_url, class: "contents" do |form| %>
-    <div class="my-5">
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Inserisci il tuo indirizzo email", value: params[:email_address], class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
+        <div>
+          <%= form.label :password, "Password", class: "block text-sm/6 font-medium text-gray-900" %>
+          <div class="mt-2">
+            <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Inserisci la tua password", maxlength: 72, class: "block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-secondary sm:text-sm/6" %>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between">
+          <div class="text-sm/6">
+            <%= link_to "Password dimenticata?", new_password_path, class: "font-semibold text-primary hover:text-primary/80" %>
+          </div>
+        </div>
+
+        <div>
+          <%= form.submit "Accedi", class: "flex w-full justify-center rounded-md bg-primary px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary" %>
+        </div>
+      <% end %>
     </div>
 
-    <div class="my-5">
-      <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "Inserisci la tua password", maxlength: 72, class: "block shadow-sm rounded-md border border-gray-400 focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-    </div>
-
-    <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-      <div class="inline">
-        <%= form.submit "Accedi", class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
-      </div>
-
-      <div class="mt-4 text-sm text-gray-500 sm:mt-0">
-        <%= link_to "Password dimenticata?", new_password_path, class: "text-gray-700 underline hover:no-underline" %>
-      </div>
-    </div>
-  <% end %>
-</div>
+    <p class="mt-10 text-center text-sm/6 text-gray-500">
+      Non hai un account?
+      <%= link_to "Registrati", new_sign_up_path, class: "font-semibold text-primary hover:text-primary/80" %>
+    </p>
+  </div>
 </div>

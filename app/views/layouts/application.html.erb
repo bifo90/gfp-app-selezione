@@ -24,6 +24,12 @@
   </head>
 
   <body class="bg-background" data-controller="<%= params[:controller] %>" data-action="<%= params[:action] %>">
+    <% if flash[:alert] %>
+      <%= render "partials/alert" %>
+    <% end %>
+    <% if flash[:notice] %>
+      <%= render "partials/notice" %>
+    <% end %>
     <main class="">
       <%= yield %>
     </main>

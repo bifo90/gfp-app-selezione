@@ -1,6 +1,6 @@
 class SignUpsController < ApplicationController
     unauthenticated_access_only
-  def show
+  def new
     @user = User.new
   end
 
@@ -9,7 +9,7 @@ class SignUpsController < ApplicationController
 
     if @user.save
       start_new_session_for(@user)
-      redirect_to login_path, notice: "Account creato con successo. Effettua il login."
+      redirect_to new_session_path, notice: { title: "Account creato con successo", description: "Effettua il login." }
     else
       render :show, status: :unprocessable_entity
     end
