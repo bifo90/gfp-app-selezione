@@ -2,10 +2,25 @@ class Admin::ConsumptionsController < ApplicationController
   before_action :set_consumption, only: [ :show, :edit, :update, :destroy ]
   include Authentication
   helper ConsumptionsHelpers
+
   layout "dashboard"
   def index
     @user = Current.user
-    @consumptions = @user.consumptions
+    consumptions = @user.consumptions
+    if params[:consumption_type].present?
+      consumptions = consumptions.where(consumption_type: params[:consumption_type])
+    end
+    if params[:start_date].present?
+      consumptions = consumptions.where("date >= ?", params[:start_date])
+    end
+    if params[:end_date].present?
+      consumptions = consumptions.where("date <= ?", params[:end_date])
+    end
+    if params[:ordering].present?
+      order_field, order_direction = params[:ordering].split
+      consumptions = consumptions.order(order_field => order_direction)
+    end
+    @pagy, @consumptions = pagy(:offset, consumptions.order(date: :desc))
   end
 
   def show
