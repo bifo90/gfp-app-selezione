@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :consumptions
     get "/", to: "dashboards#index", as: :dashboard_admin
-    get "/reports", to: "reports#index", as: :reports_admin
+    get "/stats", to: "stats#index"
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

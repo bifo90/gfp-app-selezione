@@ -65,4 +65,16 @@ class Consumption < ApplicationRecord
       self.measure = "cubic_meters"
     end
   end
+
+  def self.get_stats_data_for_page
+    data = []
+    c_grouped = Consumption.all.group_by(&:consumption_type)
+    c_grouped.each do |type, records|
+      data << {
+        title: consumption_type_label(type),
+        data: records.map { |r| [ r.date.strftime("%Y-%m-%d"), r.value ] }
+      }
+    end
+    data
+  end
 end
