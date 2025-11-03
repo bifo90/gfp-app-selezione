@@ -3,11 +3,17 @@ Rails.application.routes.draw do
   resource :session
   resources :passwords, param: :token
   resource :sign_up
-  
   namespace :admin do
     resources :consumptions
     get "/", to: "dashboards#index", as: :dashboard_admin
     get "/stats", to: "stats#index"
+  end
+
+  namespace :api do
+    resources :consumptions, only: [ :index ]
+    resources :users, only: [ :show ] do
+      resources :consumptions, only: [ :index ], controller: "users/consumptions"
+    end
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -14,6 +14,14 @@ module Authentication
       allow_unauthenticated_access **options
       before_action -> { redirect_to root_path if authenticated? }, **options
     end
+    def throw_json_response_on_unauthenticated_access(**options)
+      skip_before_action :require_authentication, **options
+      before_action -> {
+        unless authenticated?
+          render json: { error: "Unauthorized" }, status: :unauthorized
+        end
+      }, **options
+    end
   end
 
   private
