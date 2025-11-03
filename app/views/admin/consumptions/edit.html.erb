@@ -4,7 +4,7 @@
 <div class="mb-8">
   <%= link_to "← Torna ai tuoi consumi", admin_consumptions_path, class: "text-sm/6 font-medium text-gray-900" %>
 </div>
-<%= render "form", consumption: @consumption %>
+<%= render "form", consumption: @consumption, url: admin_consumption_path(@consumption) %>
 
 <br>
 

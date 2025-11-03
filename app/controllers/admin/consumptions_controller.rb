@@ -1,5 +1,5 @@
 class Admin::ConsumptionsController < ApplicationController
-  before_action :set_consumption, only: [ :show, :edit, :destroy ]
+  before_action :set_consumption, only: [ :show, :edit, :update, :destroy ]
   include Authentication
   helper ConsumptionsHelpers
   layout "dashboard"
@@ -14,7 +14,25 @@ class Admin::ConsumptionsController < ApplicationController
   def new
     @consumption = Consumption.new
   end
+
+  def create
+    @consumption = Consumption.new(consumption_params)
+    if @consumption.save
+      redirect_to admin_consumptions_path, notice: { title: "Consumo creato con successo.", description: "Il nuovo consumo è stato registrato nel sistema."}
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def edit
+  end
+
+  def update
+    if @consumption.update(consumption_params)
+      redirect_to admin_consumptions_path, notice: { title: "Consumo aggiornato con successo.", description: "Le modifiche al consumo sono state salvate nel sistema."}
+    else
+      render :edit, status: :unprocessable_entity, alert: { title: "Errore durante l'aggiornamento del consumo.", description: "Si è verificato un errore durante il salvataggio delle modifiche. Riprova."}
+    end
   end
 
   def destroy
@@ -28,5 +46,9 @@ class Admin::ConsumptionsController < ApplicationController
 
   def set_consumption
     @consumption = Consumption.find(params[:id])
+  end
+
+  def consumption_params
+    params.require(:consumption).permit(:consumption_type, :value, :date).merge(user: Current.user)
   end
 end

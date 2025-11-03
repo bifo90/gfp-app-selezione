@@ -6,6 +6,7 @@ class Consumption < ApplicationRecord
   validates :consumption_type, inclusion: { in: CONSUMPTION_TYPES }
   validates :measure, inclusion: { in: MEASURES }
   validates :value, numericality: { greater_than_or_equal_to: 0 }
+  before_validation :set_measure_based_on_type
 
   def total_by_type(type)
     where(consumption_type: type).sum(:value)
@@ -51,6 +52,17 @@ class Consumption < ApplicationRecord
       "Gas"
     else
       type.capitalize
+    end
+  end
+
+  def set_measure_based_on_type
+    case consumption_type
+    when "electricity"
+      self.measure = "kwh"
+    when "water"
+      self.measure = "liters"
+    when "gas"
+      self.measure = "cubic_meters"
     end
   end
 end

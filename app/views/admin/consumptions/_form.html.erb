@@ -1,10 +1,10 @@
 
-<div>
+<div class="bg-white p-8 rounded-xl shadow-md w-full">
   <div class="px-4 sm:px-0">
     <h3 class="text-base/7 font-semibold text-gray-900">Registrazione consumo</h3>
     <p class="mt-1 max-w-2xl text-sm/6 text-gray-500">Inserisci i dettagli del consumo.</p>
   </div>
-  <%= form_with(model: consumption, url: admin_consumptions_path(consumption)) do |form| %>
+  <%= form_with(model: consumption, url: url) do |form| %>
   <div class="mt-6 border-t border-gray-100">
     <dl class="divide-y divide-gray-100">
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -13,19 +13,20 @@
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-sm/6 font-medium text-gray-900">Tipo di consumo</dt>
-        <%= form.select :consumption_type, consumption_select_options, selected: consumption.consumption_type %>
+        <%= form.select :consumption_type, options_for_select(consumption_select_options, selected: consumption.consumption_type), {}, {class: "mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0 max-w-75"} %>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-sm/6 font-medium text-gray-900">Valore del consumo</dt>
-        <%= form.text_field :value, value: number_with_precision(consumption.value, precision: 2, significant: true), class: "mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0" %>
+        <%= form.text_field :value, value: number_with_precision(consumption.value, precision: 2, significant: true), class: "mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0 max-w-75" %>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-sm/6 font-medium text-gray-900">Data di registrazione</dt>
-        <%= form.datetime_local_field :date, value: consumption.date, class: "mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0" %>
+        <%= form.datetime_local_field :date, value: consumption.date, class: "mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0 max-w-75" %>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-        <dt class="text-sm/6 font-medium text-gray-900"></dt>
-        <%= form.submit "Conferma", class: "bg-primary text-white mt-6 w-full px-0.25 py-1 rounded-sm cursor-pointer" %>
+        <dt class="text-sm/6 font-medium text-gray-900">
+          <%= form.submit "Conferma", class: "bg-primary hover:bg-primary/80 text-white mt-6 w-full px-0.25 py-1 rounded-sm cursor-pointer" %>
+        </dt>
       </div>
     </dl>
     
