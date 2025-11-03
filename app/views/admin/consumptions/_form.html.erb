@@ -13,19 +13,24 @@
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-sm/6 font-medium text-gray-900">Tipo di consumo</dt>
-        <%= form.select :consumption_type, options_for_select(consumption_select_options, selected: consumption.consumption_type), {}, {class: "mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0 max-w-75"} %>
+        <div class="grid grid-cols-1">
+          <%= form.select :consumption_type, options_for_select(consumption_select_options, selected: consumption.consumption_type), {}, {class: "form-select col-start-1 row-start-1"} %>
+          <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400">
+              <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
+          </svg>
+        </div>          
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-sm/6 font-medium text-gray-900">Valore del consumo</dt>
-        <%= form.text_field :value, value: number_with_precision(consumption.value, precision: 2, significant: true), class: "mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0 max-w-75" %>
+        <%= form.text_field :value, value: number_with_precision(consumption.value, precision: 2, significant: true), class: "form-input" %>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-sm/6 font-medium text-gray-900">Data di registrazione</dt>
-        <%= form.datetime_local_field :date, value: consumption.date, class: "mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0 max-w-75" %>
+        <%= form.datetime_local_field :date, value: consumption.date, class: "form-input" %>
       </div>
       <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
         <dt class="text-sm/6 font-medium text-gray-900">
-          <%= form.submit "Conferma", class: "bg-primary hover:bg-primary/80 text-white mt-6 w-full px-0.25 py-1 rounded-sm cursor-pointer" %>
+          <%= form.submit "Conferma", class: "block rounded-md bg-primary px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-primary/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60 cursor-pointer" %>
         </dt>
       </div>
     </dl>

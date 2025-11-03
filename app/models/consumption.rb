@@ -15,13 +15,18 @@ class Consumption < ApplicationRecord
   def self.model_to_stats
     stats = {}
     CONSUMPTION_TYPES.each do |type|
-      stats[type] = calculate_stats_for_type(type)
+      stats[type] = calculate_stats_for_type(type, "date >= ?" => 1.month.ago)
     end
     stats
   end
 
-  def self.calculate_stats_for_type(type)
+  def self.calculate_stats_for_type(type, **options)
     records = where(consumption_type: type)
+    if options.present?
+      options.each do |key, value|
+        records = records.where(key, value)
+      end
+    end
     {
       total: records.sum(:value).to_s + " " + get_measure_for_type(type),
       average: records.average(:value).to_s + "%",
@@ -76,5 +81,9 @@ class Consumption < ApplicationRecord
       }
     end
     data
+  end
+
+  def self.get_options_for_select
+    CONSUMPTION_TYPES.map { |type| [ consumption_type_label(type), type ] }
   end
 end

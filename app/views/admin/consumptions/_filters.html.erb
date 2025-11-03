@@ -1,31 +1,31 @@
-<%= form_with url: admin_consumptions_path, method: :get, local: true, html: {class: "mt-32 mb-8"} do |form| %>
+<%= form_with url: admin_consumptions_path, method: :get, local: true, html: {class: "mt-16 mb-8"} do |form| %>
     <div class="flex flex-wrap gap-4 mb-4">
         <div>
-            <label for="location" class="block text-sm/6 font-medium text-gray-900 dark:text-white">Tipo</label>
+            <label for="location" class="block text-sm/6 font-medium text-gray-900 ">Tipo</label>
             <div class="mt-2 grid grid-cols-1">
-                <%= form.select :consumption_type, options_for_select(Consumption::CONSUMPTION_TYPES, params[:consumption_type]), { include_blank: "Seleziona un tipo" }, { class: "form-select" } %>
-                    <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400">
+                <%= form.select :consumption_type, options_for_select(Consumption.get_options_for_select, params[:consumption_type]), { include_blank: "Seleziona un tipo" }, { class: "form-select col-start-1 row-start-1" } %>
+                    <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4">
                         <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
                 </svg>
             </div>
         </div>
         <div>
-            <label for="location" class="block text-sm/6 font-medium text-gray-900 dark:text-white">Ordina per</label>
+            <label for="location" class="block text-sm/6 font-medium text-gray-900 ">Ordina per</label>
             <div class="mt-2 grid grid-cols-1">    
-                <%= form.select :ordering, options_for_select([ "date asc", "date desc", "value asc", "value desc" ], params[:ordering]), { include_blank: "Seleziona un ordinamento" }, { class: "form-select" } %>
-                <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 dark:text-gray-400">
+                <%= form.select :ordering, options_for_select([ "date asc", "date desc", "value asc", "value desc" ], params[:ordering]), { include_blank: "Seleziona un ordinamento" }, { class: "form-select col-start-1 row-start-1" } %>
+                <svg viewBox="0 0 16 16" fill="currentColor" data-slot="icon" aria-hidden="true" class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4 ">
                     <path d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
                 </svg>
             </div>    
         </div>  
         <div>   
-            <label for="location" class="block text-sm/6 font-medium text-gray-900 dark:text-white">Ricerca consumo da</label>
+            <label for="location" class="block text-sm/6 font-medium text-gray-900 ">Ricerca consumo da</label>
             <div class="mt-2 grid grid-cols-1">
                 <%= form.date_field :start_date, max: Date.today, value: params[:start_date], class: "form-date_field" %>
             </div>    
         </div>  
         <div>   
-            <label for="location" class="block text-sm/6 font-medium text-gray-900 dark:text-white">Ricerca consumo fino a</label>
+            <label for="location" class="block text-sm/6 font-medium text-gray-900 ">Ricerca consumo fino a</label>
             <div class="mt-2 grid grid-cols-1">
                 <%= form.date_field :end_date, max: Date.tomorrow, value: params[:end_date], class: "form-date_field" %>
             </div>  
