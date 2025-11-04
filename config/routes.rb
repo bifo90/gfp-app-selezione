@@ -4,9 +4,8 @@ Rails.application.routes.draw do
   resources :passwords, param: :token
   resource :sign_up
   namespace :admin do
-    resources :consumptions
     get "/", to: "dashboards#index", as: :dashboard_admin
-    get "/stats", to: "stats#index"
+    resources :consumptions
   end
 
   namespace :api do
