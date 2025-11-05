@@ -14,7 +14,7 @@ Applicazione Rails 8 per la gestione e il monitoraggio dei consumi energetici (e
 ### 1. Clonare il Repository
 
 ```bash
-git clone <repository-url>
+git clone git@github.com:bifo90/gfp-app-selezione.git
 cd gfp-app-selezione
 ```
 
@@ -23,9 +23,6 @@ cd gfp-app-selezione
 ```bash
 # Installa le gemme Ruby
 bundle install
-
-# Installa le dipendenze JavaScript (se necessario)
-npm install
 ```
 
 ### 3. Configurare il Database
@@ -51,11 +48,13 @@ EDITOR="code --wait" rails credentials:edit
 
 ### 5. Avviare il Server
 
+Avviare l'applicazione in due tab separati, questo perchè permette l'utilizzo di 'binding.irb' per debug
+
 ```bash
-# Modalità sviluppo
+# TAB Terminale 1 - Modalità sviluppo
 rails server
 
-# Oppure usa il comando bin/dev per avviare con tutti i processi
+# TAB Terminale 2 -  usa il comando bin/dev per avviare con tutti i processi
 bin/dev
 ```
 
@@ -107,14 +106,14 @@ COVERAGE=true rails test
 
 #### Registrazione
 
-- **URL**: `/sign_up`
+- **URL**: `/sign_up/new`
 - **Descrizione**: Crea un nuovo account utente
 - **Campi richiesti**:
-  - Email
-  - Password (minimo 6 caratteri)
-  - Conferma password
   - Nome
   - Cognome
+  - Email
+  - Password
+  - Conferma password
 
 #### Login
 
@@ -128,7 +127,7 @@ COVERAGE=true rails test
 - **Descrizione**: Recupera la password tramite email
 - **Processo**:
   1. Inserisci la tua email
-  2. Ricevi il link per il reset via email
+  2. Ricevi il link per il reset via email (funzione non attiva in quanto non c'è collegato alcun server SMTP, quindi copiare il link che vedi nel terminale generato con il parametro in rotta contenente il token di ripristino password)
   3. Crea una nuova password
 
 ### Area Admin (Richiede Autenticazione)
@@ -255,22 +254,10 @@ bundle exec rubocop -A
 - Le misure vengono impostate automaticamente in base al tipo di consumo
 - L'interfaccia è completamente in italiano
 
-## 🤝 Contribuire
-
-1. Fork il progetto
-2. Crea un branch per la tua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit le modifiche (`git commit -m 'Add some AmazingFeature'`)
-4. Push al branch (`git push origin feature/AmazingFeature`)
-5. Apri una Pull Request
-
-## 📄 Licenza
-
-Questo progetto è distribuito sotto licenza [specificare la licenza].
-
 ## 👥 Autori
 
 Stefano Bifolco
 
 ## 📞 Supporto
 
-Per problemi o domande, aprire una issue su GitHub o contattare [email di supporto].
+Per problemi o domande, aprire una issue su GitHub.
