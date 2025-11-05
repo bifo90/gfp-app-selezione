@@ -2,14 +2,14 @@
 
 one:
   user: one
-  type: 
+  consumption_type: electricity
   date: 2025-11-02 11:10:56
   value: 1.5
-  measure: MyString
+  measure: kwh
 
 two:
   user: two
-  type: 
+  consumption_type: water
   date: 2025-11-02 11:10:56
-  value: 1.5
-  measure: MyString
+  value: 2.5
+  measure: liters

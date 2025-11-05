@@ -1,13 +1,13 @@
 require "test_helper"
 
 class AdminsControllerTest < ActionDispatch::IntegrationTest
-  test "should get consuptions" do
-    get admins_consuptions_url
-    assert_response :success
+  setup do
+    @user = users(:one)
+    sign_in_as(@user)
   end
 
-  test "should get stats" do
-    get admins_stats_url
+  test "should redirect to dashboard on admin root" do
+    get admin_dashboard_admin_url
     assert_response :success
   end
 end

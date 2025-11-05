@@ -11,7 +11,7 @@ class SignUpsController < ApplicationController
       start_new_session_for(@user)
       redirect_to new_session_path, notice: { title: "Account creato con successo", description: "Effettua il login." }
     else
-      render :show, status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
