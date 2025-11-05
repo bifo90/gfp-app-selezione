@@ -105,7 +105,7 @@ class Admin::ConsumptionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should redirect to login if not authenticated" do
     delete session_url
-    
+
     get admin_consumptions_url
     assert_redirected_to new_session_url
   end

@@ -46,14 +46,14 @@ class UserConsumptionFlowTest < ActionDispatch::IntegrationTest
       }
     }
     assert_redirected_to admin_consumptions_url
-    
+
     follow_redirect!
     assert_response :success
 
     # View consumptions list
     get admin_consumptions_url
     assert_response :success
-    
+
     # Edit consumption
     consumption = new_user.consumptions.first
     get edit_admin_consumption_url(consumption)
@@ -118,7 +118,7 @@ class UserConsumptionFlowTest < ActionDispatch::IntegrationTest
     # Reset password with token
     @user.reload
     token = @user.password_reset_token
-    
+
     get edit_password_url(token)
     assert_response :success
 

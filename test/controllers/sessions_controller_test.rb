@@ -60,7 +60,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should redirect to admin dashboard after login for admin users" do
     sign_in_as(@user)
-    
+
     get root_path
     # Verify user is authenticated
     assert @user.sessions.any?

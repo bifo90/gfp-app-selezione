@@ -32,11 +32,11 @@ class ConsumptionTest < ActiveSupport::TestCase
     @consumption.consumption_type = "electricity"
     @consumption.measure = "kwh"
     assert @consumption.valid?
-    
+
     @consumption.consumption_type = "water"
     @consumption.measure = "liters"
     assert @consumption.valid?
-    
+
     @consumption.consumption_type = "gas"
     @consumption.measure = "cubic_meters"
     assert @consumption.valid?
@@ -90,14 +90,14 @@ class ConsumptionTest < ActiveSupport::TestCase
     user = users(:one)
     Consumption.create!(user: user, consumption_type: "electricity", value: 10, date: 3.days.ago)
     Consumption.create!(user: user, consumption_type: "electricity", value: 20, date: Date.today)
-    
+
     result = Consumption.average_daily_for_user_and_type(user.id, "electricity")
     assert result > 0
   end
 
   test "monthly_trend should return trend data" do
     trend = Consumption.monthly_trend(type: "electricity")
-    
+
     assert_includes trend.keys, :this_month
     assert_includes trend.keys, :last_month
     assert_includes trend.keys, :change_percentage
@@ -108,7 +108,7 @@ class ConsumptionTest < ActiveSupport::TestCase
   test "user_summary should return data for all consumption types" do
     user = users(:one)
     summary = Consumption.user_summary(user.id)
-    
+
     assert_equal 3, summary.keys.length
     %w[electricity water gas].each do |type|
       assert_includes summary.keys, type
@@ -122,9 +122,9 @@ class ConsumptionTest < ActiveSupport::TestCase
   test "estimated_cost should calculate cost correctly" do
     user = users(:one)
     Consumption.create!(user: user, consumption_type: "electricity", value: 100, date: Date.today)
-    
+
     result = Consumption.estimated_cost(type: "electricity", rate_per_unit: 0.15)
-    
+
     assert_includes result.keys, :total_consumption
     assert_includes result.keys, :rate
     assert_includes result.keys, :estimated_cost
@@ -136,11 +136,11 @@ class ConsumptionTest < ActiveSupport::TestCase
     user = users(:one)
     start_date = 3.days.ago.to_date
     end_date = Date.today
-    
+
     Consumption.create!(user: user, consumption_type: "electricity", value: 10, date: start_date)
-    
+
     result = Consumption.daily_breakdown(start_date, end_date, type: "electricity")
-    
+
     assert_kind_of Array, result
     result.each do |day|
       assert_includes day.keys, :date
@@ -152,7 +152,7 @@ class ConsumptionTest < ActiveSupport::TestCase
 
   test "get_options_for_select should return proper options" do
     options = Consumption.get_options_for_select
-    
+
     assert_equal 3, options.length
     assert_equal [ "Elettricità", "electricity" ], options[0]
     assert_equal [ "Acqua", "water" ], options[1]

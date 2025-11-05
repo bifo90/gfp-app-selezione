@@ -35,7 +35,7 @@ class ConsumptionsHelpersTest < ActionView::TestCase
 
   test "consumption_select_options should return correct options" do
     options = consumption_select_options
-    
+
     assert_equal 3, options.length
     assert_includes options, [ "Elettricità", "electricity" ]
     assert_includes options, [ "Acqua", "water" ]

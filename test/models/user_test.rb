@@ -69,7 +69,7 @@ class UserTest < ActiveSupport::TestCase
       value: 10,
       date: Date.today
     )
-    
+
     assert_difference "Consumption.count", -1 do
       @user.destroy
     end

@@ -58,7 +58,7 @@ class SignUpsControllerTest < ActionDispatch::IntegrationTest
 
   test "should not create user with duplicate email" do
     existing_user = users(:one)
-    
+
     assert_no_difference("User.count") do
       assert_raises(ActiveRecord::RecordNotUnique) do
         post sign_up_url, params: {

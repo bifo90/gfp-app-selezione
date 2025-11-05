@@ -101,7 +101,7 @@ class Consumption < ApplicationRecord
       consumptions = where(user_id: user_id, consumption_type: type)
                      .order(:date)
                      .pluck(:date, :value)
-      return [{ name: type, data: consumptions.map { |date, value| [date.to_date.to_s, value] } }]
+      return [ { name: type, data: consumptions.map { |date, value| [ date.to_date.to_s, value ] } } ]
     end
 
     CONSUMPTION_TYPES.map do |consumption_type|
@@ -111,7 +111,7 @@ class Consumption < ApplicationRecord
 
       {
         name: consumption_type,
-        data: consumptions.map { |date, value| [date.to_date.to_s, value] }
+        data: consumptions.map { |date, value| [ date.to_date.to_s, value ] }
       }
     end
   end

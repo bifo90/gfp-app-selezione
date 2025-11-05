@@ -33,7 +33,7 @@ class Admin::ConsumptionsController < ApplicationController
   def create
     @consumption = Consumption.new(consumption_params)
     if @consumption.save
-      redirect_to admin_consumptions_path, notice: { title: "Consumo creato con successo.", description: "Il nuovo consumo è stato registrato nel sistema."}
+      redirect_to admin_consumptions_path, notice: { title: "Consumo creato con successo.", description: "Il nuovo consumo è stato registrato nel sistema." }
     else
       render :new, status: :unprocessable_entity
     end
@@ -44,16 +44,16 @@ class Admin::ConsumptionsController < ApplicationController
 
   def update
     if @consumption.update(consumption_params)
-      redirect_to admin_consumptions_path, notice: { title: "Consumo aggiornato con successo.", description: "Le modifiche al consumo sono state salvate nel sistema."}
+      redirect_to admin_consumptions_path, notice: { title: "Consumo aggiornato con successo.", description: "Le modifiche al consumo sono state salvate nel sistema." }
     else
-      render :edit, status: :unprocessable_entity, alert: { title: "Errore durante l'aggiornamento del consumo.", description: "Si è verificato un errore durante il salvataggio delle modifiche. Riprova."}
+      render :edit, status: :unprocessable_entity, alert: { title: "Errore durante l'aggiornamento del consumo.", description: "Si è verificato un errore durante il salvataggio delle modifiche. Riprova." }
     end
   end
 
   def destroy
     puts params.inspect
     if @consumption.destroy
-      redirect_to admin_consumptions_path, notice: { title: "Consumo eliminato con successo.", description: "Il consumo è stato eliminato definitivamente dal sistema."}
+      redirect_to admin_consumptions_path, notice: { title: "Consumo eliminato con successo.", description: "Il consumo è stato eliminato definitivamente dal sistema." }
     end
   end
 
