@@ -173,6 +173,78 @@ COVERAGE=true rails test
 - **Descrizione**: Rimuove definitivamente un consumo
 - **Conferma**: Richiesta conferma prima dell'eliminazione
 
+### API REST (JSON)
+
+L'applicazione espone le seguenti API REST per l'accesso programmatico ai dati.
+
+#### Elenco Tutti i Consumi
+
+- **URL**: `/api/consumptions`
+- **Metodo**: `GET`
+- **Descrizione**: Restituisce l'elenco di tutti i consumi nel sistema
+- **Autenticazione**: Richiesta
+- **Formato Risposta**: JSON
+- **Esempio Risposta**:
+
+```json
+[
+  {
+    "id": 1,
+    "user_id": 1,
+    "consumption_type": "electricity",
+    "value": 150.5,
+    "measure": "kwh",
+    "date": "2025-11-05",
+    "created_at": "2025-11-05T10:30:00.000Z",
+    "updated_at": "2025-11-05T10:30:00.000Z"
+  }
+]
+```
+
+#### Consumi di un Utente Specifico
+
+- **URL**: `/api/users/:user_id/consumptions`
+- **Metodo**: `GET`
+- **Descrizione**: Restituisce tutti i consumi di un utente specifico
+- **Autenticazione**: Richiesta (solo l'utente può accedere ai propri dati)
+- **Parametri URL**:
+  - `user_id`: ID dell'utente
+- **Formato Risposta**: JSON
+- **Esempio Richiesta**: `GET /api/users/1/consumptions`
+- **Esempio Risposta**:
+
+```json
+[
+  {
+    "id": 1,
+    "user_id": 1,
+    "consumption_type": "water",
+    "value": 75.0,
+    "measure": "liters",
+    "date": "2025-11-05"
+  }
+]
+```
+
+- **Errori**:
+  - `401 Unauthorized`: Se l'utente tenta di accedere ai dati di un altro utente
+  ```json
+  {
+    "error": "Unauthorized"
+  }
+  ```
+
+#### Autenticazione API
+
+Per accedere alle API è necessario essere autenticati. L'autenticazione avviene tramite session cookie ottenuto effettuando il login nell'applicazione web.
+
+**Note Importanti**:
+
+- Tutte le risposte API sono in formato JSON
+- Gli endpoint richiedono autenticazione
+- L'utente può accedere solo ai propri consumi tramite `/api/users/:user_id/consumptions`
+- Non è possibile creare, modificare o eliminare consumi tramite API (solo lettura)
+
 ## 🎨 Funzionalità Principali
 
 ### Tipi di Consumo Supportati
