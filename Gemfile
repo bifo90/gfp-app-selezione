@@ -47,7 +47,7 @@ gem "chartkick"
 gem "groupdate"
 
 # Libreria Paginazione
-gem "pagy", "~> 43.0" # Omit the patch segment to avoid breaking changes
+gem "pagy", "~> 43.1" # Omit the patch segment to avoid breaking changes
 
 # Libreria Ricerce
 gem "ransack"
